@@ -15,5 +15,5 @@ Features to add:
 
 
 Pictures:
-![picture 1](https://github.com/lacraig2/XKCDViewer/blob/master/images/Screen%20Shot%202015-08-12%20at%206.20.48%20PM.png?raw=true)
-![picture 2](https://github.com/lacraig2/XKCDViewer/blob/master/images/Screen%20Shot%202015-08-12%20at%206.23.25%20PM.png?raw=true)
+![picture 1](http://i.imgur.com/QxP972S.png)
+![picture 2](http://i.imgur.com/14aYWAd.png)
