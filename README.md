@@ -2,6 +2,7 @@
 XKCD Viewer is a small Java application that reads comics from the xkcd site and displays them on screen.
 
 To build this project:
+
 1. run build.sh in the main project (you should only need to run this once)
 2. run run.sh. This should start the program
 
