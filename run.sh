@@ -1,1 +1,2 @@
-java -classpath "libs/*:." Main
+cd bin
+java -classpath "../libs/*:." Main
