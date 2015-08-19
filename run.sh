@@ -1,1 +1,1 @@
-java -classpath "libs/*:." com.lukecraig.XKCDViewer.Main
+java -classpath "libs/*:." Main

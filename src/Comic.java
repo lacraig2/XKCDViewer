@@ -1,4 +1,4 @@
-package com.lukecraig.XKCDViewer;
+
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;

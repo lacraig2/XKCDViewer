@@ -1,4 +1,3 @@
-package com.lukecraig.XKCDViewer;
 
 /**
  * @author Luke Craig
