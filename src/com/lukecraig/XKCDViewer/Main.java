@@ -1,4 +1,5 @@
 package com.lukecraig.XKCDViewer;
+
 /**
  * @author Luke Craig
  * @Date: Aug 12, 2015
@@ -9,6 +10,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Random;
 
 import javax.swing.JFrame;
@@ -108,7 +114,8 @@ public class Main extends JFrame implements ActionListener, KeyListener {
    * @param args
    */
   public static void main(String[] args) {
-    new Main();
+    Main m = new Main();
+    getNumMissedComics(m);
   }
 
   /**
@@ -131,7 +138,57 @@ public class Main extends JFrame implements ActionListener, KeyListener {
     } else if (e.getKeyCode() == KeyEvent.VK_R) {
       cp.getRand().doClick();
     }
+  }
 
+  /**
+   * This method uses a JOptionPane to report back the number of comics missed since the last time
+   * the user opened the program. It uses a SQLite database for this purpose.
+   * 
+   * @param m
+   */
+  public static void getNumMissedComics(Main m) {
+    // specific information for easy changing
+    final String TABLE_NAME = "COMIC";
+    final String FIELD_NAME = "COMICNUM";
+    final String DB_NAME = "ComicRegisterV1";
+    Connection c = null;
+    Statement stmt = null;
+
+    try {
+      Class.forName("org.sqlite.JDBC");
+      c = DriverManager.getConnection("jdbc:sqlite:" + DB_NAME + ".db");
+      stmt = c.createStatement();
+      // create the table if you need to
+      stmt.execute(
+          "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "(" + FIELD_NAME + " INT NOT NULL)");
+
+      // get all entries from the table to find the maximum and count them
+      String sql = "SELECT * FROM " + TABLE_NAME + " ORDER BY " + FIELD_NAME + " DESC";
+      ResultSet rs = stmt.executeQuery(sql);
+      int lastComic = 0, num = 0;
+      while (rs.next()) {
+        lastComic = Math.max(lastComic, rs.getInt(FIELD_NAME));
+        num++; // count the number of entries
+      }
+
+      // if a last comic has never been recorded assume this is their first time opening the app
+      lastComic = (lastComic == 0) ? m.cp.getMaxComicNum() : lastComic;
+
+      if (num >= 10) // ensures table stays small
+        stmt.executeUpdate("DELETE FROM " + TABLE_NAME);
+
+      // adds current max comic to table
+      stmt.execute("INSERT INTO " + TABLE_NAME + " (" + FIELD_NAME + ") VALUES ("
+          + m.cp.getMaxComicNum() + ")");
+
+      if (m.cp.getMaxComicNum() > lastComic) {
+        // show the user the number of comics they have missed
+        JOptionPane.showMessageDialog(null, "There are "
+            + Math.abs(m.cp.getMaxComicNum() - lastComic) + " new comics since your last visit.");
+      }
+    } catch (SQLException | ClassNotFoundException e) {
+      e.printStackTrace();
+    }
   }
 
   /**
