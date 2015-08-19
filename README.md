@@ -1,5 +1,11 @@
 # XKCD Viewer
-XKCD Viewer is a small Java application that reads comics from the xkcd site and displays them on screen. The program gives you the ability to scroll through the comics in a small window. To navigate you can use the left arrow (or "a" key) to move to the previous comic, the right arrow (or "d" key) to move to the next comic, and the "r" key to get a random comic. The program has been updated with the ability to tell you, at startup, how many comics you have missed since your last time using the program.
+XKCD Viewer is a small Java application that reads comics from the xkcd site and displays them on screen. The program gives you the ability to scroll through the comics in a small window.  The program has been updated with the ability to tell you, at startup, the number of comics that the use has missed since their last time using the program.
+
+#####Navigation:
+* Use the left arrow (or "a" key) to move to the previous comic
+* Use the right arrow (or "d" key) to move to the next comic
+* Use the "r" key to move to a random comic
+* Use the Escape key to exit the program.
 
 #####To build this project:
 
