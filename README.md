@@ -30,7 +30,7 @@ XKCD Viewer is a lightweight Java application that reads comics from the website
 3. Put both jar files in the libs folder.
 4. To build the project run the following command from the base of your project
 
-  > javac -cp "libs/*" -d "bin" src/*.java
+  > javac -cp "libs/\*" -d "bin" src/\*.java
 
 5. To run the project run the following command from the bin folder of your project
 
